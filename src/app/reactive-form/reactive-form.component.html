@@ -1,0 +1,177 @@
+<div class="wrapper">
+<div class="col-md-8">
+  <div class="card">
+    <mat-toolbar color="primary">
+      <span class="fill-remaining-space">Sign up</span>
+    </mat-toolbar>
+    <div class="card-body">
+      <form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <mat-form-field>
+          <label>Name</label>
+          <input matInput type="text" formControlName="name" />
+          <span
+            class="text-danger"
+            *ngIf="
+              (registerFormControl.name.touched || submitted) &&
+              registerFormControl.name.errors?.required
+            "
+          >
+            Name is required
+          </span>
+        </mat-form-field>
+          <br>
+        <mat-form-field>
+          <label>Email</label>
+          <input matInput type="text" formControlName="email" />
+          <span
+            class="text-danger"
+            *ngIf="
+              (registerFormControl.email.touched || submitted) &&
+              registerFormControl.email.errors?.required
+            "
+          >
+            Email is required
+          </span>
+          <span
+            class="text-danger"
+            *ngIf="
+              registerFormControl.email.touched &&
+              registerFormControl.email.errors?.email
+            "
+          >
+            Enter a valid email address
+          </span>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <label>User Name</label>
+          <input matInput type="text" formControlName="username" />
+          <span
+            class="text-danger"
+            *ngIf="
+              (registerFormControl.username.touched || submitted) &&
+              registerFormControl.username.errors?.required
+            "
+          >
+            User Name is required
+          </span>
+          <span
+            class="text-danger"
+            *ngIf="
+              registerFormControl.username.touched &&
+              registerFormControl.username.errors?.userNameNotAvailable
+            "
+          >
+            User Name is not available
+          </span>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <label>Password</label>
+          <input matInput type="password" formControlName="password" />
+          <span
+            class="text-danger"
+            *ngIf="
+              (registerFormControl.password.touched || submitted) &&
+              registerFormControl.password.errors?.required
+            "
+          >
+            Password is required
+          </span>
+          <span
+            class="text-danger"
+            *ngIf="
+              registerFormControl.password.touched &&
+              registerFormControl.password.errors?.invalidPassword
+            "
+          >
+            Password should have minimum 8 characters, at least 1 uppercase
+            letter, 1 lowercase letter and 1 number
+          </span>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <label>Confirm Password</label>
+          <input
+            matInput
+            matinput
+            matInput
+            type="password"
+            formControlName="confirmPassword"
+          />
+          <span
+            class="text-danger"
+            *ngIf="
+              (registerFormControl.confirmPassword.touched || submitted) &&
+              registerFormControl.confirmPassword.errors?.required
+            "
+          >
+            Confirm Password is required
+          </span>
+          <span
+            class="text-danger"
+            *ngIf="
+              registerFormControl.confirmPassword.touched &&
+              registerFormControl.confirmPassword.errors?.passwordMismatch
+            "
+          >
+            Passwords doesnot match
+          </span>
+        </mat-form-field>
+        <br>
+        <div>
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            class="btn btn-success"
+          >
+            Register
+          </button>
+        </div>
+      </form>
+
+      <div class="error" *ngIf="errorMessage !== ''">{{ errorMessage }}</div>
+      <div class="success" *ngIf="successMessage !== ''">
+        {{ successMessage }}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-md-2">
+  
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="e-mail">
+      <th mat-header-cell *matHeaderCellDef> e-mail </th>
+      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef> User Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="password">
+      <th mat-header-cell *matHeaderCellDef> Password </th>
+      <td mat-cell *matCellDef="let element"> {{element.password}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+</div>
